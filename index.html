@@ -125,6 +125,18 @@
     }
     .hero{ height:300px }
     .hero h1{ font-size:36px }
+  header{
+    height:auto;              /* вместо фиксираната височина */
+    flex-wrap:wrap;           /* ако няма място, навигацията минава на нов ред */
+    padding:10px 12px;        /* малко по-компактно за мобилни */
+  }
+  header nav ul{
+    flex-wrap:wrap;           /* позволява пренасяне */
+    justify-content:center;   /* центрира линковете */
+  }
+  header nav ul li{
+    margin:6px 10px;          /* по-малки отстояния между бутоните */
+  }
 }
 
 </style>
