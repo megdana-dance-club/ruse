@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>МегданЪ – Начало</title>
+<style>
+  :root{
+    --header-h:70px;
+    --footer-h:60px;
+    --sidebar-w:150px;
+    --blue:#004a99;
+    --blue-dark:#002d5d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f9f9f9;color:#111}
+
+  /* HEADER */
+  header{
+    position:fixed; top:0; left:0; right:0; height:var(--header-h);
+    background:var(--blue); display:flex; align-items:center; justify-content:space-between;
+    padding:0 20px; z-index:3000;
+  }
+  header .logo{color:#fff;font-weight:700;font-size:20px}
+  header nav ul{margin:0;padding:0;display:flex;list-style:none}
+  header nav ul li{margin-left:20px}
+  header nav ul li a{color:#fff;text-decoration:none;font-weight:700}
+  header nav ul li a.active{ text-decoration:underline; }
+
+  /* CONTENT + SIDEBARS (shevitsa) */
+  .content-wrapper{
+    position:relative;
+    min-height:calc(100vh - var(--footer-h));
+    padding-top: calc(var(--header-h) + 24px);
+    padding-bottom:40px;
+  }
+  .sidebar-left, .sidebar-right{
+    position:fixed;
+    top: var(--header-h);
+    bottom:0;
+    width:var(--sidebar-w);
+    background-image: url('12.png');
+    background-repeat: repeat-y;
+    background-position: center top;
+    background-size: 500px auto;
+    z-index:1000;
+    image-rendering: pixelated;
+  }
+  .sidebar-left{ left:0 }
+  .sidebar-right{ right:0; transform:scaleX(-1) }
+
+  main{
+    margin: 0 calc(var(--sidebar-w) + 24px);
+    padding: 20px;
+    max-width: 1200px;
+  }
+
+  .card{
+    background:#fff;border-radius:10px;padding:20px;margin-bottom:24px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.06);
+  }
+
+  /* HERO */
+  .hero{
+    height:420px;border-radius:10px;overflow:hidden;
+    background: url('лого1.jpg') center/cover no-repeat, linear-gradient(180deg,#2e63a8,#0c3f87);
+    display:flex;align-items:center;justify-content:center;position:relative;
+  }
+  .hero::after{ content:""; position:absolute; inset:0; background:rgba(0,0,0,0.28); }
+  .hero h1{ position:relative; z-index:1; color:#fff; font-size:56px; margin:0; text-align:center; text-shadow:0 6px 18px rgba(0,0,0,0.6) }
+
+  /* CAROUSEL + TEXT (already ok) */
+  .row{ display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap }
+  .carousel{ flex:1 1 520px; max-width:560px; border-radius:8px; overflow:hidden; background:#eee; aspect-ratio:16/10; position:relative }
+  .carousel img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .45s ease }
+  .carousel img.active{ opacity:1 }
+  .carousel-text{ flex:1 1 320px; min-width:260px; color:#333; line-height:1.6 }
+
+  /* GALLERY grid (show last 4) */
+  .gallery-grid{ display:grid; grid-template-columns: repeat(auto-fill,minmax(220px,1fr)); gap:16px }
+  .gallery-item{ border-radius:10px; overflow:hidden; background:#fff; box-shadow:0 6px 14px rgba(0,0,0,0.06); cursor:pointer; transition:transform .12s }
+  .gallery-item:hover{ transform:translateY(-6px) }
+  .gallery-item img{ width:100%; height:160px; object-fit:cover; display:block }
+  .gallery-item p{ margin:8px 12px 12px; font-size:14px; color:#333 }
+
+  /* LIGHTBOX */
+  .lightbox{ display:none; position:fixed; inset:0; background:rgba(0,0,0,0.92); z-index:5000; }
+  .lightbox img{ display:block; max-width:140%; max-height:80vh; margin:20% auto 0; border-radius:8px; }
+  .lb-close,.lb-prev,.lb-next{ position:absolute; color:#fff; font-size:40px; font-weight:700; cursor:pointer; user-select:none }
+  .lb-close{ top:18px; right:28px }
+  .lb-prev{ left:18px; top:50%; transform:translateY(-50%) }
+  .lb-next{ right:18px; top:50%; transform:translateY(-50%) }
+
+  /* NEWS */
+  .news-grid{ display:grid; grid-template-columns: repeat(auto-fill,minmax(300px,1fr)); gap:16px }
+  .news-card{ background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 6px 14px rgba(0,0,0,0.06) }
+  .news-card img{ width:100%; height:170px; object-fit:cover; display:block }
+  .news-card .body{ padding:12px }
+  .news-card h3{ margin:0 0 8px; color:var(--blue) }
+
+  .notice{ text-align:center; color:#666; padding:8px 0 }
+
+  footer{ background:var(--blue-dark); color:#fff; text-align:center; padding:14px 8px; margin-top:18px }
+
+  @media(max-width:900px){
+    .sidebar-left,.sidebar-right{ display:none; }
+    main{ margin:0 14px }
+    .hero{ height:300px }
+    .hero h1{ font-size:36px }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">МегданЪ</div>
+  <nav>
+    <ul>
+      <li><a href="index.html" class="active">Начало</a></li>
+      <li><a href="about.html">За нас</a></li>
+      <li><a href="classes.html">Курсове</a></li>
+      <li><a href="gallery.html">Галерия</a></li>
+      <li><a href="contact.html">Контакти</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="content-wrapper">
+  <div class="sidebar-left"></div>
+  <div class="sidebar-right"></div>
+
+  <main>
+    <section class="card hero"><h1>Добре дошли</h1></section>
+
+    <section class="card">
+      <div class="row">
+        <div class="carousel" id="carousel"></div>
+        <div class="carousel-text">
+          <h2>Нашата мисия</h2>
+          <p>  "МегданЪ" е създаден през 2024 година от Ренета Стефанова. Школата ви обещава вълнуващо пътешествие в света на българския фолклор.С млад и амбициозен екип, обичащ фолклора, "МегданЪ" ви кани да се потопите в магията на българските народни танци. Без значение дали сте начинаещ или напреднал танцьор, при нас ще намерите своето място.Изучават се хора от различните области на България, които ще ви запознаят с богатството на нашия фолклор.</p>
+        </div>
+      </div>
+      <div id="carouselMsg" class="notice">Зареждаме карусела...</div>
+    </section>
+
+    <section class="card">
+      <h2>Галерия</h2>
+      <div id="galleryMsg" class="notice">Зареждаме галерията...</div>
+      <div id="galleryGrid" class="gallery-grid"></div>
+    </section>
+
+    <section class="card">
+      <h2>Новини</h2>
+      <div id="newsMsg" class="notice">Зареждаме новините...</div>
+      <div id="newsGrid" class="news-grid"></div>
+    </section>
+
+  </main>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox">
+  <span class="lb-close" id="lbClose">&times;</span>
+  <span class="lb-prev" id="lbPrev">&#10094;</span>
+  <span class="lb-next" id="lbNext">&#10095;</span>
+  <img id="lbImg" alt="">
+</div>
+
+<footer>© 2025 МегданЪ. Всички права запазени.</footer>
+
+<script>
+/* ========== CONFIG ========== */
+const API_KEY = "AIzaSyC4LnS2joLqzca_d48tKwe240ZtHq-4W-M"; // твой
+const FOLDER_ID_GALLERY = "1ezPV1iwcdYiKgo2fpytQREHw84XVxHpl";
+const SHEET_ID = "1LiN8HiJO6RNn098M2xwZtea3YjTZrji9GVtoH2x_F_o";
+const SHEET_RANGES = ["Лист1!A2:C","Sheet1!A2:C","Лист1!A2:C"]; // опити (първо Лист1)
+
+/* ========== HELPERS ========== */
+function ucView(id){ return `https://drive.google.com/uc?export=view&id=${id}`; }
+function altMedia(id){ return `https://www.googleapis.com/drive/v3/files/${id}?alt=media&key=${API_KEY}`; }
+
+function extractDriveId(url=""){
+  if(!url) return null;
+  // raw id?
+  let m = url.match(/^[a-zA-Z0-9_-]{10,}$/);
+  if(m) return m[0];
+  // /file/d/<id>/
+  m = url.match(/\/file\/d\/([a-zA-Z0-9_-]{10,})/);
+  if(m) return m[1];
+  // id=...
+  m = url.match(/[?&]id=([a-zA-Z0-9_-]{10,})/);
+  if(m) return m[1];
+  // open?id=...
+  m = url.match(/open\?id=([a-zA-Z0-9_-]{10,})/);
+  if(m) return m[1];
+  // any /d/<id>
+  m = url.match(/\/d\/([a-zA-Z0-9_-]{10,})/);
+  if(m) return m[1];
+  return null;
+}
+
+/* try setting img src from array of possible sources (primary -> fallback...) */
+function setSmartSrc(imgEl, sources=[]){
+  let i=0;
+  function next(){
+    if(i>=sources.length) return;
+    imgEl.onerror = ()=>{ i++; next(); };
+    imgEl.src = sources[i];
+  }
+  next();
+}
+
+/* create img with smart sources (altMedia -> ucView -> thumb direct) */
+function createSmartImg({id=null, direct=null, thumb=null, alt=""}){
+  const img = new Image();
+  img.loading = "lazy";
+  img.referrerPolicy = "no-referrer";
+  img.alt = alt || "";
+  const sources = [];
+  if(id) sources.push(altMedia(id), ucView(id));
+  if(direct) sources.push(direct);
+  if(thumb) sources.push(thumb);
+  setSmartSrc(img, sources.filter(Boolean));
+  return img;
+}
+
+/* ========== CAROUSEL (from gallery folder first few images) ========== */
+const carouselEl = document.getElementById("carousel");
+const carouselMsg = document.getElementById("carouselMsg");
+let carouselTimer, carouselIndex = 0;
+
+async function loadCarouselFromDrive(){
+  try{
+    const q = encodeURIComponent(`'${FOLDER_ID_GALLERY}' in parents and mimeType contains 'image/' and trashed = false`);
+    // orderBy createdTime desc, pageSize 6 for carousel
+    const url = `https://www.googleapis.com/drive/v3/files?q=${q}&orderBy=createdTime desc&pageSize=6&fields=files(id,name,thumbnailLink,createdTime)&key=${API_KEY}`;
+    const res = await fetch(url);
+    if(!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+    const data = await res.json();
+    const files = data.files || [];
+    if(files.length === 0){
+      carouselMsg.textContent = "Няма снимки за карусела.";
+      return;
+    }
+    carouselMsg.remove();
+    carouselEl.innerHTML = "";
+    files.forEach((f, idx)=>{
+      const img = createSmartImg({id:f.id, thumb:f.thumbnailLink, alt:f.name});
+      if(idx===0) img.classList.add("active");
+      carouselEl.appendChild(img);
+    });
+    const slides = Array.from(carouselEl.querySelectorAll("img"));
+    if(slides.length>1){
+      carouselTimer = setInterval(()=>{
+        slides[carouselIndex].classList.remove("active");
+        carouselIndex = (carouselIndex+1) % slides.length;
+        slides[carouselIndex].classList.add("active");
+      },3000);
+    }
+  }catch(err){
+    console.error("Carousel load error:",err);
+    carouselMsg.textContent = "Грешка при зареждане на карусела. Провери правата на папката в Drive.";
+  }
+}
+
+/* ========== GALLERY (last 4 images) ========== */
+const galleryGrid = document.getElementById("galleryGrid");
+const galleryMsg = document.getElementById("galleryMsg");
+let galleryImages = [];
+
+async function loadGalleryFromDrive(){
+  try{
+    const q = encodeURIComponent(`'${FOLDER_ID_GALLERY}' in parents and mimeType contains 'image/' and trashed = false`);
+    const url = `https://www.googleapis.com/drive/v3/files?q=${q}&orderBy=createdTime desc&pageSize=4&fields=files(id,name,thumbnailLink,createdTime)&key=${API_KEY}`;
+    const res = await fetch(url);
+    if(!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+    const data = await res.json();
+    const files = data.files || [];
+    if(files.length === 0){
+      galleryMsg.textContent = "Няма снимки в галерията.";
+      return;
+    }
+    galleryMsg.remove();
+    galleryGrid.innerHTML = "";
+    galleryImages = files.map(f => ({id:f.id,thumb:f.thumbnailLink||null,title:f.name}));
+    galleryImages.forEach((f,i)=>{
+      const card = document.createElement("div");
+      card.className = "gallery-item";
+      const img = createSmartImg({id:f.id, thumb:f.thumb, alt:f.title});
+      card.appendChild(img);
+      const p = document.createElement("p");
+      p.textContent = f.title.replace(/\.[^.]+$/,"");
+      card.appendChild(p);
+      card.addEventListener("click", ()=> openLightbox(i));
+      galleryGrid.appendChild(card);
+    });
+  }catch(err){
+    console.error("Gallery load error:",err);
+    galleryMsg.textContent = "Грешка при зареждане на галерията. Проверете правата на папката в Drive.";
+  }
+}
+
+/* ========== LIGHTBOX ========== */
+const lb = document.getElementById("lightbox");
+const lbImg = document.getElementById("lbImg");
+const lbClose = document.getElementById("lbClose");
+const lbPrev = document.getElementById("lbPrev");
+const lbNext = document.getElementById("lbNext");
+let lbIndex = 0;
+
+function openLightbox(i){
+  lbIndex = i;
+  const item = galleryImages[lbIndex];
+  setSmartSrc(lbImg, [ altMedia(item.id), ucView(item.id), item.thumb ]);
+  lb.style.display = "block";
+}
+function closeLightbox(){ lb.style.display = "none"; }
+function lbShow(delta){
+  lbIndex = (lbIndex + delta + galleryImages.length) % galleryImages.length;
+  const item = galleryImages[lbIndex];
+  setSmartSrc(lbImg, [ altMedia(item.id), ucView(item.id), item.thumb ]);
+}
+lbClose.onclick = closeLightbox;
+lbPrev.onclick = ()=> lbShow(-1);
+lbNext.onclick = ()=> lbShow(1);
+lb.addEventListener("click", e=> { if(e.target===lb) closeLightbox(); });
+document.addEventListener("keydown", e=>{
+  if(lb.style.display === "block"){
+    if(e.key==="ArrowLeft") lbShow(-1);
+    if(e.key==="ArrowRight") lbShow(1);
+    if(e.key==="Escape") closeLightbox();
+  }
+});
+
+/* ========== NEWS (from Sheets) ========== */
+const newsGrid = document.getElementById("newsGrid");
+const newsMsg = document.getElementById("newsMsg");
+
+function resolveImageSourcesFromCell(cellValue){
+  // If cellValue is null/empty -> return []
+  if(!cellValue) return [];
+  // If it already looks like full http(s) direct link (not drive), use it
+  if(/^https?:\/\//i.test(cellValue) && !/drive\.google\.com/i.test(cellValue)) return [cellValue];
+  // If drive link or id — extract id
+  const id = extractDriveId(cellValue);
+  if(id) return [ altMedia(id), ucView(id) ];
+  // If it's not a drive link but looks like an id-like string:
+  if(/^[a-zA-Z0-9_-]{10,}$/.test(cellValue)) return [ altMedia(cellValue), ucView(cellValue) ];
+  return [];
+}
+
+async function loadNewsFromSheets(){
+  // Try multiple ranges (Лист1 first)
+  let rows = null;
+  let usedRange = null;
+  for(const range of SHEET_RANGES){
+    try{
+      const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(range)}?key=${API_KEY}`;
+      const res = await fetch(url);
+      if(!res.ok){
+        // If 403/404, skip to next range attempt
+        console.warn("Sheets range fetch failed", range, res.status, res.statusText);
+        continue;
+      }
+      const data = await res.json();
+      rows = data.values || null;
+      usedRange = range;
+      break;
+    }catch(e){
+      console.warn("Sheets fetch error for range",range,e);
+      continue;
+    }
+  }
+
+  // Fallback to GVIZ (if v4 did not work)
+  if(!rows){
+    try{
+      const gvizUrl = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+      const r = await fetch(gvizUrl);
+      const txt = await r.text();
+      const json = JSON.parse(txt.substring(47).slice(0,-2));
+      // json.table.cols -> labels
+      const cols = (json.table.cols||[]).map(c => (c.label||"").trim());
+      // find indexes
+      const idxTitle = 0; // assume A
+      const idxText = 1;  // B
+      // find column that likely contains image link
+      const idxImg = 2;
+      const gRows = json.table.rows || [];
+      rows = gRows.map(gr => [(gr.c[0]?.v||""),(gr.c[1]?.v||""),(gr.c[2]?.v||"")]);
+      console.info("Loaded news via GVIZ fallback");
+    }catch(e){
+      console.error("Sheets GVIZ fallback failed:",e);
+      newsMsg.textContent = "Неуспешно зареждане на новините. Увери се, че таблицата е споделена/публикувана.";
+      return;
+    }
+  }
+
+  // rows is array of arrays: each row => [title,text,imageCell]
+  if(!rows || rows.length===0){
+    newsMsg.textContent = "Няма новини в таблицата.";
+    return;
+  }
+
+  newsMsg.remove();
+  newsGrid.innerHTML = "";
+
+  for(const r of rows){
+    const title = r[0] || "";
+    const text  = r[1] || "";
+    const imageCell = r[2] || "";
+
+    const card = document.createElement("div");
+    card.className = "news-card";
+
+    // create img with smart sources
+    const img = new Image();
+    img.loading = "lazy";
+    img.referrerPolicy = "no-referrer";
+    img.alt = title || "";
+
+    const sources = resolveImageSourcesFromCell(imageCell);
+    if(sources.length > 0){
+      setSmartSrc(img, sources);
+      card.appendChild(img);
+    }
+
+    const body = document.createElement("div");
+    body.className = "body";
+    const h3 = document.createElement("h3"); h3.textContent = title;
+    const p  = document.createElement("p"); p.textContent = text;
+    body.appendChild(h3); body.appendChild(p);
+    card.appendChild(body);
+
+    newsGrid.appendChild(card);
+  }
+}
+
+/* ========== INIT ========== */
+(async function init(){
+  await Promise.all([
+    loadCarouselFromDrive(),
+    loadGalleryFromDrive(),
+    loadNewsFromSheets()
+  ]);
+})();
+</script>
+</body>
+</html>

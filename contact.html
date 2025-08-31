@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <title>Контакти – МегданЪ</title>
+  <style>
+    :root{
+      --header-h: 60px;
+      --footer-h: 80px;
+      --sidebar-w: 150px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+    }
+
+    /* Навигация (фиксирана) */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--header-h);
+      background: #004a99;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 3000;
+    }
+    header .logo { color: white; font-weight: bold; font-size: 20px; }
+    header nav ul { margin: 0; padding: 0; display: flex; list-style: none; }
+    header nav ul li { margin-left: 20px; }
+    header nav ul li a { color: white; text-decoration: none; font-weight: bold; }
+    header nav ul li a.active { text-decoration: underline; }
+
+    /* Обвивка за съдържанието + шевици */
+    .content-wrapper {
+      position: relative;
+      min-height: calc(100vh - var(--footer-h));
+      padding-top: calc(var(--header-h) + 40px);
+      padding-bottom: 40px;
+    }
+
+    /* Странични шевици */
+    .sidebar-left,
+    .sidebar-right {
+      position: absolute;
+      top: var(--header-h);
+      bottom: 0;
+      width: var(--sidebar-w);
+      background-image: url('12.png');
+      background-repeat: repeat-y;
+      background-position: center top;
+      background-size: 500px auto;
+      z-index: 1000;
+      image-rendering: crisp-edges;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: pixelated;
+    }
+    .sidebar-left  { left: 0; }
+    .sidebar-right { right: 0; transform: scaleX(-1); }
+
+    /* Основно съдържание */
+    main {
+      max-width: 800px;
+      margin: 0 auto 40px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 1500;
+    }
+
+    /* Хедър със снимка */
+    .form-header { position: relative; text-align: center; margin-bottom: 20px; }
+    .header-img { width: 100%; height: 300px; object-fit: cover; border-radius: 10px; }
+    .header-text {
+      position: absolute; top: 20%; left: 50%; transform: translate(-50%, -50%);
+      color: #fff; font-size: 2em; font-weight: bold;
+      text-shadow:  0 0 5px #00f,
+                    0 0 10px #00f,
+                    0 0 20px #0ff,
+                    0 0 40px #0ff;
+    }
+
+    /* Футър */
+    footer {
+      height: var(--footer-h);
+      background: #004a99;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+    }
+
+    /* Guard за ниски екрани */
+    @media (max-height: 540px) {
+      .content-wrapper { padding-top: calc(var(--header-h) + 20px); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">МегданЪ</div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Начало</a></li>
+      <li><a href="about.html">За нас</a></li>
+      <li><a href="classes.html">Курсове</a></li>
+      <li><a href="gallery.html">Галерия</a></li>
+      <li><a href="contact.html" class="active">Контакти</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="content-wrapper">
+  <div class="sidebar-left"></div>
+  <div class="sidebar-right"></div>
+
+  <main>
+    <div class="form-header">
+      <img src="kontakti snimka.jpg" alt="Танци" class="header-img">
+      <div class="header-text">Свържи се с нас</div>
+    </div>
+
+    <p>Освен групови занимания за деца и възрастни, предлагаме и индивидуални уроци, изготвяне на сватбени танци, танци-изненади и много други специални услуги. При нас ще намерите и народни носии под наем, които ще ви помогнат да се почувствате истински част от традицията.
+
+Но това не е всичко! При нас ви очакват много нови запознанства, приятели, купони и незабравими приключения. Станете част от нашата весела и приятелска общност и се наслаждавайте на всяко събитие и танцова вечер<br><br>
+    Имейл: Megdana@abv.bg<br>Телефон: 088 535 6663</p>
+
+    <!-- Вградената Google форма -->
+    <!-- ТУК СМЕНИ ЛИНКА С ТВОЯ -->
+    <div class="google-form">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScVP0REJD1eII1KspLb4bJvuBHvdZm3Ffro_6ncQlWk4GF2pg/viewform?usp=dialog" width="640" height="1073" frameborder="0" marginheight="0" marginwidth="0">Зарежда се…</iframe>
+            
+        Зареждане…
+      </iframe>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <p>&copy; 2025 МегданЪ. Всички права запазени.</p>
+</footer>
+
+</body>
+</html>
