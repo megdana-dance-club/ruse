@@ -50,10 +50,12 @@
   .sidebar-right{ right:0; transform:scaleX(-1) }
 
   main{
-    margin: 0 calc(var(--sidebar-w) + 24px);
+    margin: 0 auto;              /* центрира съдържанието */
     padding: 20px;
+    width: 100%;
     max-width: 1200px;
-  }
+}
+
 
   .card{
     background:#fff;border-radius:10px;padding:20px;margin-bottom:24px;
@@ -102,12 +104,17 @@
 
   footer{ background:var(--blue-dark); color:#fff; text-align:center; padding:14px 8px; margin-top:18px }
 
-  @media(max-width:900px){
+@media(max-width:900px){
     .sidebar-left,.sidebar-right{ display:none; }
-    main{ margin:0 14px }
+    main{ 
+        margin: 0 auto; 
+        padding: 14px; 
+        max-width: 100%;   /* на телефон да заема цялата ширина */
+    }
     .hero{ height:300px }
     .hero h1{ font-size:36px }
-  }
+}
+
 </style>
 </head>
 <body>
