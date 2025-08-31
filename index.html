@@ -64,10 +64,14 @@
 
   /* HERO */
   .hero{
-    height:420px;border-radius:10px;overflow:hidden;
-    background: url('лого1.jpg') center/cover no-repeat, linear-gradient(180deg,#2e63a8,#0c3f87);
+    height:420px;
+    border-radius:10px;
+    overflow:hidden;
+    background: url('лого1.jpg') center/contain no-repeat, 
+                linear-gradient(180deg,#2e63a8,#0c3f87);
+    background-color:#0c3f87; /* фон зад снимката */
     display:flex;align-items:center;justify-content:center;position:relative;
-  }
+}
   .hero::after{ content:""; position:absolute; inset:0; background:rgba(0,0,0,0.28); }
   .hero h1{ position:relative; z-index:1; color:#fff; font-size:56px; margin:0; text-align:center; text-shadow:0 6px 18px rgba(0,0,0,0.6) }
 
